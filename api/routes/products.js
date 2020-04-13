@@ -46,14 +46,14 @@ router.get("/", (req, res, next) => {
             Image: {
               type: "GET",
               url:
-                "http://localhost:3000/" +
+                config.HOSTNAME +
                 doc.destination +
                 "/" +
                 doc.productImage
             },
             request: {
               type: "GET",
-              url: "http://localhost:3000/products/" + doc._id
+              url:   config.HOSTNAME + "/products/" + doc._id
             }
           };
         })
@@ -98,7 +98,7 @@ router.post("/", upload.single("productImage"), (req, res, next) => {
           destination: result.destination,
           request: {
             type: "GET",
-            url: "http://localhost:3000/products/" + result._id
+            url:  config.HOSTNAME + "/products/" + result._id
           }
         }
       });
@@ -124,14 +124,14 @@ router.get("/:productId", (req, res, next) => {
           Image: {
             type: "GET",
             url:
-              "http://localhost:3000/" +
+              config.HOSTNAME + "/" +
               doc.destination +
               "/" +
               doc.productImage
           },
           request: {
             type: "GET",
-            url: "http://localhost:3000/products/"
+            url:  config.HOSTNAME + "/products/"
           }
         });
       } else {
@@ -160,7 +160,7 @@ router.patch("/:productId", (req, res, next) => {
         message: "Обновление продукта",
         request: {
           type: "GET",
-          url: "http://localhost:3000/products/" + id
+          url: config.HOSTNAME + "/products/" + id
         }
       });
     })
@@ -181,7 +181,7 @@ router.delete("/:productId", (req, res, next) => {
         message: "Удалён продукт!!",
         request: {
           type: "POST",
-          url: "http://localhost:3000/products",
+          url: config.HOSTNAME + "/products",
           body: {
             name: "String",
             price: "Number"
